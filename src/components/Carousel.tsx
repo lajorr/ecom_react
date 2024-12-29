@@ -8,24 +8,17 @@ import { useState } from 'react';
 import { data } from '../data';
 
 const Carousel = () => {
-
-
-
     const [slide, setSlide] = useState(0)
     const [isVisible, setIsVisible] = useState(true);
-
-
     function nextSlide() {
         setSlide(slide === data.length - 1 ? 0 : slide + 1)
     }
     function previousSlide() {
         setSlide(slide === 0 ? data.length - 1 : slide - 1)
     }
-
     const handleClose = () => {
         setIsVisible(false);
     };
-
     return (
         isVisible ?
             <div className='h-[500px] mx-auto relative' >
