@@ -19,7 +19,7 @@ const ExpandableSearch = () => {
     return (
         <div className='place-self-end h-full flex items-center text-white'>
             {isSearchVisible ? (<div className='inline'>
-                <input ref={searchInputRef} className='rounded-2xl h-8 w-30 p-2 mr-4 focus:outline-none focus:p-2 ' type="text" placeholder='Search' />
+                <input ref={searchInputRef} className='text-black rounded-2xl h-8 w-30 p-2 mr-4 focus:outline-none focus:p-2 ' type="text" placeholder='Search' />
             </div>) : (<div
                 className="inline-block h-8 w-0 transition-all duration-300 ease-in-out"
                 style={{ overflow: 'hidden' }}

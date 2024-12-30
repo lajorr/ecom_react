@@ -2,6 +2,7 @@
 import { AdBanner } from '../components/AdBanner';
 import Carousel from '../components/Carousel';
 import CategoryProducts from '../components/CategoryProducts';
+import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 export const Home = () => {
@@ -24,6 +25,8 @@ export const Home = () => {
                 <CategoryProducts categoryTitle='Category 2' className='mt-4' />
 
             </main>
+
+            <Footer />
         </div>
     )
 }
