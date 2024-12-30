@@ -1,17 +1,12 @@
 
 import { AdBanner } from '../components/AdBanner';
-import Carousel from '../components/Carousel';
 import CategoryProducts from '../components/CategoryProducts';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
 
 export const Home = () => {
 
     return (
         <div className=' max-w-[1536px] mx-auto'>
 
-            <Carousel />
-            <Navbar />
             <main className='mt-4' >
                 <div className='flex gap-4' >
                     <section className='w-[400px] bg-gray-200 p-2 flex justify-center rounded-xl'>
@@ -26,7 +21,6 @@ export const Home = () => {
 
             </main>
 
-            <Footer />
         </div>
     )
 }
