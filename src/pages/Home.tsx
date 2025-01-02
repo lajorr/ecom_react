@@ -15,7 +15,7 @@ export const Home = () => {
                 <div className='flex gap-4' >
                     <section className='w-[400px] bg-gray-200 p-2  rounded-xl'>
                         {uniqueCategories.map((cat) => (
-                            <div>{cat}</div>
+                            <div key={cat}>{cat}</div>
                         ))}
                     </section>
                     <CategoryProducts products={sportsAndOutdoors} />

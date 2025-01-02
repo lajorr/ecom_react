@@ -1,6 +1,8 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
+import Cart from "./pages/Cart";
 import { Home } from "./pages/Home";
+import { CartProvider } from "./providers/CartContext";
 
 
 function App() {
@@ -8,11 +10,15 @@ function App() {
   const router = createBrowserRouter(createRoutesFromElements([
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
+      <Route path="cart" element={<Cart />} />
     </Route>
   ]))
 
   return (
-    <RouterProvider router={router}></RouterProvider>
+
+    <CartProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </CartProvider>
   );
 }
 
