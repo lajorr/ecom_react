@@ -3,6 +3,8 @@ import RootLayout from "./layouts/RootLayout";
 import Cart from "./pages/Cart";
 import { Home } from "./pages/Home";
 import { CartProvider } from "./providers/CartContext";
+import { CategoryProvider } from "./providers/CategoryContext";
+import { ProductProvider } from "./providers/ProductContext";
 
 
 function App() {
@@ -17,7 +19,11 @@ function App() {
   return (
 
     <CartProvider>
-      <RouterProvider router={router}></RouterProvider>
+      <ProductProvider>
+        <CategoryProvider>
+          <RouterProvider router={router}></RouterProvider>
+        </CategoryProvider>
+      </ProductProvider>
     </CartProvider>
   );
 }

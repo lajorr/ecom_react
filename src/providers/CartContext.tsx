@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import Product from "../types/Product";
 
-type Order = {
+export type Order = {
     product: Product,
     quantity: number,
     subTotal: number
@@ -12,15 +12,16 @@ type CartContextType = {
     addToCart: (product: Product) => void,
     orderLength: number,
     getTotal: () => number,
-    removeItemFromCart: (id: number) => void,
-    incrementQuantity: (id: number) => void,
-    decrementQuantity: (id: number) => void,
+    removeItemFromCart: (id: string) => void,
+    incrementQuantity: (id: string) => void,
+    decrementQuantity: (id: string) => void,
 
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
+
     const [orders, setOrders] = useState<Order[]>([]);
 
     const calculateTotal = () => {
@@ -28,43 +29,47 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         return Number(total);
     }
 
-    const removeItem = (id: number) => {
-        const updatedCart = orders.filter(order => order.product.id !== id);
+    const removeItem = (id: string) => {
+        const updatedCart = orders.filter(order => order.product._id !== id);
         setOrders(updatedCart);
     }
 
     const addToCart = (product: Product) => {
-        const newOrder: Order = { product, quantity: 1, subTotal: product.product_price }
-        const existingOrder = orders.find(order => order.product.id === product.id);
+        const newOrder: Order = { product, quantity: 1, subTotal: Number(product.price) }
+        const existingOrder = orders.find(order => order.product._id === product._id);
 
         if (existingOrder) {
             existingOrder.quantity++;
-            existingOrder.subTotal += product.product_price;
+            existingOrder.subTotal += Number();
         } else {
             setOrders(prev => [...prev, newOrder]);
         }
     }
 
-    const incrementQuantity = (id: number) => {
-        const order = orders.find(order => order.product.id === id);
+    const incrementQuantity = (id: string) => {
+        const order = orders.find(order => order.product._id === id);
         if (order) {
-            // check if in stock
-            const updatedOrder = { ...order, quantity: order.quantity + 1, subTotal: order.subTotal + order.product.product_price };
-            setOrders(prev => prev.map(order => order.product.id === id ? updatedOrder : order));
+            const updatedOrder: Order = {
+                ...order,
+                quantity: order.quantity + 1,
+                subTotal: order.subTotal + Number(order.product.price)
+            };
+            setOrders(prev => prev.map(order => order.product._id === id ? updatedOrder : order));
         }
-
     }
 
-    const decrementQuantity = (id: number) => {
-        const order = orders.find(order => order.product.id === id);
+    const decrementQuantity = (id: string) => {
+        const order = orders.find(order => order.product._id === id);
         if (order) {
             if (order.quantity > 1) {
-
-                const updatedOrder = { ...order, quantity: order.quantity - 1, subTotal: order.subTotal - order.product.product_price }
-                setOrders(prev => prev.map(order => order.product.id === id ? updatedOrder : order))
+                const updatedOrder = {
+                    ...order,
+                    quantity: order.quantity - 1,
+                    subTotal: order.subTotal - Number(order.product.price)
+                }
+                setOrders(prev => prev.map(order => order.product._id === id ? updatedOrder : order))
             }
         }
-
     }
 
     return (
