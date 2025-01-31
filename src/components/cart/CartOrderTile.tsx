@@ -3,11 +3,11 @@
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
-import { Order } from '../../providers/CartContext';
+import { CartProduct } from '../../providers/CartContext';
 
 
 type CartOrderTileProps = {
-    order: Order;
+    order: CartProduct;
     removeItem: (id: string) => void;
     incrementQuantity: (id: string) => void;
     decrementQuantity: (id: string) => void;

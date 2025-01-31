@@ -4,7 +4,6 @@ import { useCartContext } from "../providers/CartContext";
 const Cart = () => {
 
     const cartContext = useCartContext();
-    console.log(cartContext.orderLength);
 
     const columnNames = ["Product", "Price", "Quantity", "Sub total"];
     return (
@@ -17,7 +16,7 @@ const Cart = () => {
 
             <div className="flex flex-col gap-4">
                 {cartContext.orderLength > 0 &&
-                    cartContext.orderList.map(order => (
+                    cartContext.cartList.map(order => (
                         <CartOrderTile
                             removeItem={cartContext.removeItemFromCart}
                             order={order}

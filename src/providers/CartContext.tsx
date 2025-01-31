@@ -1,14 +1,14 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import Product from "../types/Product";
 
-export type Order = {
+export type CartProduct = {
     product: Product,
     quantity: number,
     subTotal: number
 }
 
 type CartContextType = {
-    orderList: Order[],
+    cartList: CartProduct[],
     addToCart: (product: Product) => void,
     orderLength: number,
     getTotal: () => number,
@@ -22,7 +22,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
 
-    const [orders, setOrders] = useState<Order[]>([]);
+    const [orders, setOrders] = useState<CartProduct[]>([]);
 
     const calculateTotal = () => {
         const total = orders.reduce((prev, current) => prev + current.subTotal, 0).toFixed(2)
@@ -35,7 +35,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
 
     const addToCart = (product: Product) => {
-        const newOrder: Order = { product, quantity: 1, subTotal: Number(product.price) }
+        const newOrder: CartProduct = { product, quantity: 1, subTotal: Number(product.price) }
         const existingOrder = orders.find(order => order.product._id === product._id);
 
         if (existingOrder) {
@@ -49,7 +49,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const incrementQuantity = (id: string) => {
         const order = orders.find(order => order.product._id === id);
         if (order) {
-            const updatedOrder: Order = {
+            const updatedOrder: CartProduct = {
                 ...order,
                 quantity: order.quantity + 1,
                 subTotal: order.subTotal + Number(order.product.price)
@@ -75,7 +75,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return (
         <CartContext.Provider value={
             {
-                orderList: orders,
+                cartList: orders,
                 addToCart,
                 orderLength: orders.length,
                 getTotal: calculateTotal,
